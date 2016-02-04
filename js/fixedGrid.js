@@ -25,14 +25,14 @@ var fixedGrid = function(p,options){
 	this.options.id = options.id || "fixedGrid";
 	this.options.height = options.height || "auto";
 	this.options.width = options.width || "auto";
-	this.columnStyle = "";                            /*存储 td 的样式*/
+	this.columnStyle = "";                            
 	this.columnStyle = "width:"+this.options.columnWidth+"px;min-width:"+this.options.columnWidth+"px;";
 	this.sortHTML = '<div class="fixedGrid-sort" index={n} style="float:right;margin-right:5px;width:0;height:0;border-top:5px solid #ccc;border-left:5px solid transparent;border-right:5px solid transparent;"></div>';
 
 	this.topDivView1HTML = '<div class="fixedGrid-view1" style="float:left;">{content}</div>';
 	this.topDivView2HTML = '<div class="fixedGrid-view2" style="overflow:hidden;">{content}</div>';
-	this.viewHeaderHTML = '<div class="fixedGrid-header">{content}</div>'; /*include tableHTML*/
-	this.viewBodyHTML = '<div class="fixedGrid-body">{content}</div>'; /*include tableHTML*/
+	this.viewHeaderHTML = '<div class="fixedGrid-header">{content}</div>'; 
+	this.viewBodyHTML = '<div class="fixedGrid-body">{content}</div>'; 
 	this.tableHTML = '<table class="fixedGrid-table" cellspacing="0" cellpadding="0" border="0" style="{style}">'+
 						'{content}'+
 	                 '</table>';
@@ -213,7 +213,7 @@ fixedGrid.prototype.initData = function(json) {
 	var rows = this.options.newRows;
 	var len ,baseN = 0;
 	var resultObject = {};
-	if(rows!=undefined) /*有数据*/
+	if(rows!=undefined) 
 	{
 		if(this.options.pageSize!=undefined)
 		{
@@ -234,15 +234,15 @@ fixedGrid.prototype.initData = function(json) {
 	}
 	else 
 	{
-		len = 0;  /* when len=0 ,only draw header */
+		len = 0;  
 	}
 	var trTmpl = '<tr class="fixedGrid-row fixedGrid-row-{n}" index="{n}">{content}</tr>';
 	var tdTmpl = '<td class="fixedGrid-col fixedGrid-col-{n}" style="{style}" index="{n}">{content}</td>';
-	var td , tr , tds = "" , trs = "" , i , colN=0; /* colN 是固定列的循环变量 */
+	var td , tr , tds = "" , trs = "" , i , colN=0; 
 	var td2, tr2, tds2= "" , trs2= "";
 	var mTdTmplR = '<td class="fixedGrid-col fixedGrid-rowspan fixedGrid-col-{n}" rowspan="{rown}" style="{style}">{content}</td>';  /*多行头*/
 	var mTdTmpl  = '<td class="fixedGrid-col fixedGrid-col-{n}" colspan="{coln}" style="{style}">{content}</td>';  /*多表头*/
-	var mTd , mTr , mTds ="" , mTrs = "";  /*多表头*/
+	var mTd , mTr , mTds ="" , mTrs = "";  
 	var mTd2,mTr2 , mTds2="" , mTrs2 ="";
 	var rowIndex = 0 , colIndex = 0;
 	var table = this.tableHTML;
@@ -262,17 +262,17 @@ fixedGrid.prototype.initData = function(json) {
 	var fieldValue = "";
 	var field = "";
 	var mergeIndex = 0;
-	var maxEnd = 0;     /*存储合并行的最大下标*/
+	var maxEnd = 0;     
 	var columnStyle="";
 
-	if(this.options.fixedCol==undefined||this.options.fixedCol==0)/*没有固定列*/
+	if(this.options.fixedCol==undefined||this.options.fixedCol==0)
 	{
 		tableBody1 ="";
 		tableHeader1 = "";
 		mergeIndex = 0;
 		for(i=baseN ; i<len+baseN ; i++)
 		{
-			if(this.options.mergeRow != undefined) /* mergeRow */
+			if(this.options.mergeRow != undefined) 
 			{
 				if(mergeIndex<this.mergeRow.length)
 				{
@@ -351,7 +351,7 @@ fixedGrid.prototype.initData = function(json) {
 
 		tableBody2 = tableBody2.replace("{content}",trs);
 
-		/*--draw header begin--*/
+		
 		mergeIndex = 0;
 		mTds = "";
 		for(i=0;i<columns.length;i++)
@@ -401,9 +401,9 @@ fixedGrid.prototype.initData = function(json) {
 				}
 			}/*end if mergeHeader*/
 
-		}/*end for draw header*/
+		}
 
-		if(this.options.mergeRow != undefined) /* 合并行 */
+		if(this.options.mergeRow != undefined)
 		{
 			tds = '<td class="fixedGrid-sharp">&nbsp;</td>'+ tds;
 		}
@@ -434,11 +434,11 @@ fixedGrid.prototype.initData = function(json) {
 		//this.$parent[0].innerHTML = topDivHTML;
 		this.topDivHTML.innerHTML = topDivView1HTML + topDivView2HTML;
 	}
-	else if(this.options.fixedCol!=undefined&&this.options.fixedCol>0) /*******有固定列********/
+	else if(this.options.fixedCol!=undefined&&this.options.fixedCol>0) 
 	{
-		for(i=baseN ; i<len+baseN ; i++) /*绘制数据*/
+		for(i=baseN ; i<len+baseN ; i++) 
 		{
-			if(this.options.mergeRow != undefined) /* mergeRow */
+			if(this.options.mergeRow != undefined) 
 			{
 				if(mergeIndex<this.mergeRow.length)
 				{
@@ -535,7 +535,7 @@ fixedGrid.prototype.initData = function(json) {
 		tableBody2 = tableBody2.replace("{content}",trs2);
 
 		/*draw header begin*/
-		for(i=0;i<columns.length;i++)/*绘制表头数据*/
+		for(i=0;i<columns.length;i++)
 		{
 			columnStyle =this.columnStyle;
 			field = columns[i].caption || columns[i].field;
@@ -579,7 +579,7 @@ fixedGrid.prototype.initData = function(json) {
 				}
 			}
 
-			if(this.options.mergeHeader != undefined)  /*多表头*/
+			if(this.options.mergeHeader != undefined) 
 			{
 				if(mergeIndex<this.mergeHeader.length)
 				{
@@ -671,12 +671,11 @@ fixedGrid.prototype.initData = function(json) {
 		topDivView1HTML = topDivView1HTML.replace("{content}",viewHeaderHTML1 + viewBodyHTML1);
 		topDivView2HTML = topDivView2HTML.replace("{content}",viewHeaderHTML2 + viewBodyHTML2);
 
-		//topDivHTML = topDivHTML.replace("{content}",topDivView1HTML + topDivView2HTML);
-		//this.$parent[0].innerHTML = topDivHTML;/*渲染到DOM树上*/
+
 		this.topDivHTML.innerHTML = topDivView1HTML + topDivView2HTML;
 	}/*end if*/
 
-	/*以上已初始化完数据*/
+
 
 	if(this.options.isMatrix!=undefined && this.options.isMatrix)
 	{
@@ -715,24 +714,24 @@ fixedGrid.prototype.setBox = function(){
 	$(this.parentName + " .fixedGrid-view2 .fixedGrid-header table").css("position","absolute");
 
 
-	/*绑定滚动条联动处理*/
+
 	var $leftTable = $(this.parentName + " .fixedGrid-view1 .fixedGrid-body table");
 	var $rightTopTable = $(this.parentName + " .fixedGrid-view2 .fixedGrid-header table");
 
 	$(this.parentName + " .fixedGrid-view2 .fixedGrid-body").unbind().bind("scroll",function(){
-		if($leftTable[0]!=undefined)/*有固定列*/
+		if($leftTable[0]!=undefined)
 		{
 			$leftTable[0].style.top = "-" + this.scrollTop + "px";
 			$rightTopTable[0].style.left = "-" + this.scrollLeft + "px";
 		}
-		else /*没有固定列*/
+		else 
 		{
 			$rightTopTable[0].style.left = "-" + this.scrollLeft + "px";
 		}
 	});
 	/*end*/
 
-	/*绑定 grid event*/
+
 	this.live("td","click",function(e){
 		var target = e.target;
 		var index = e.target.getAttribute("index");
@@ -810,7 +809,7 @@ fixedGrid.prototype.createPage = function(){
 	var pageStr ="";
 	var numberHTML = '<span style="float:left;" class="fixedGrid-number {btnclass}">{n}</span>';
 	var numberStr = "" , numberStrSum="";
-	var a,b,c;  /*临时变量，计算pageCount*/
+	var a,b,c;  
 	var i , baseN=1;
 
 	if(this.pageObject.pageDOM==undefined)
@@ -933,7 +932,7 @@ fixedGrid.prototype.createPage = function(){
 	});
 	/*next page end*/
 
-	/*页码单击事件处理函数*/
+	
 	$(this.parentName + $string).unbind().bind("click", function(e){
 		This.pageObject.curPage = parseInt(this.innerHTML);
 		This.initData({
@@ -946,7 +945,7 @@ fixedGrid.prototype.createPage = function(){
 		$this.addClass("fixedGrid-number-select");
 		var curSpanValue = parseInt(e.target.innerHTML);
 
-		/*更换页码*/
+		
 		if(e.target.className.indexOf("fixedGrid-number-last")>0)
 		{
 			if(curSpanValue>=This.pageObject.pageCount)
@@ -1016,9 +1015,6 @@ fixedGrid.prototype.createPage = function(){
 /*end function createPage*/
 
 
-/************
-转换矩阵
-************/
 fixedGrid.prototype.getMatrix = function(_rows_){
 	var object = {};
 	var i,j,v,n=0;
@@ -1092,10 +1088,7 @@ fixedGrid.prototype.process = function(f){
 }
 
 
-/***************************************************
-类型：外部接口
-rows==[] 或 rows = {rows:[],pageSize:n,recordCount:n}
-****************************************************/
+
 fixedGrid.prototype.loadData = function(rows){
 	if(rows!=undefined)
 	{
