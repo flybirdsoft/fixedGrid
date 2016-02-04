@@ -1,0 +1,330 @@
+﻿<!DOCTYPE html>
+<HTML>
+<head>
+<meta charset="UTF-8">
+<style>
+.fl{
+	float: left;
+	border:1px solid #ccc;
+}
+.clear{
+	clear: both;
+}
+.btn{
+	height: 30px;
+	line-height: 30px;
+	margin:10px;
+}
+
+table{
+	padding:0;
+	margin: 0;
+}
+tbody{
+	padding: 0;
+	margin: 0;
+	background-color:#FFF;
+}
+
+
+/*表头合并样式 begin*/
+.fixedGrid table .fixedGrid-header-row-0 td{
+	background-color: #5b7391;
+	color:#FFF;
+}
+.fixedGrid table .fixedGrid-header-row-1 td{
+	background-color: #919fb2;
+	color:#FFF;
+}
+/*表头样式 end*/
+
+/*行合并的样式 begin*/
+.fixedGrid table .fixedGrid-rowspan{
+	background-color: #ccc;
+	width:200px; /**/
+}
+.wFixedGrid .fixedGrid-sharp{
+	width:200px;/**/
+}
+
+.fixedGrid table.matrix .fixedGrid-col-0{
+	background-color: #e5e5e5;
+}
+.fixedGrid table.matrix .fixedGrid-header-row-1{
+	background-color: #ccc;
+}
+/*行合并的样式 begin*/
+.fixedGrid table.matrix .fixedGrid-header-row-1 td{
+	background-color: #5b7391;
+}
+
+/*表格线 begin*/
+.fixedGrid table{
+	border-left:1px solid #999;
+	border-top:1px solid #999;
+	background-color:#e3e8f0;
+}
+.fixedGrid table td{
+	border-right:1px solid #4a5d7b;
+	border-bottom: 1px solid #4a5d7b;
+	height: 30px;
+	text-align: center;
+	padding:0;
+	margin: 0;
+}
+/*表格线 end */
+
+
+/*去掉table 与table直接的线 begin*/
+.fixedGrid .fixedGrid-view2 .fixedGrid-body table{
+	border-left:none;
+	border-top:none;
+}
+.fixedGrid .fixedGrid-view2 .fixedGrid-header table{
+	border-left:none;
+}
+.fixedGrid .fixedGrid-view1 .fixedGrid-body table{
+	border-top:none;
+}
+/*去掉table 与table直接的线 end*/
+
+
+/*分页 样式 begin*/
+.wFixedGrid .fixedGridPage{
+	margin-top:10px!important;
+}
+.wFixedGrid .fixedGridPage .prevPage{
+	border:1px solid #ccc;
+	border-right:none; 
+	padding-left:10px;
+	padding-right: 10px
+}
+.wFixedGrid .fixedGridPage .nextPage{
+	border:1px solid #ccc;
+	border-left:none; 	
+	padding-left:10px;
+	padding-right: 10px;
+}
+.wFixedGrid .fixedGridPage span{
+	width:30px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	border:1px solid #ccc;
+	border-right:none; 
+}
+.wFixedGrid .fixedGridPage .fixedGrid-number-last{
+	border-right:1px solid #ccc;
+}
+.wFixedGrid .fixedGridPage dt{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+
+.wFixedGrid .fixedGridPage .fixedGrid-number-select{
+	background: #ccc;
+}
+/*分页 样式 end */
+
+
+</style>
+</head>
+
+<BODY>
+
+	<div id="grid" style="overflow:hidden;border:1px solid #ccc;height:300px;width:700px;">
+
+	</div>
+
+	<button id="btn" class="btn">矩阵转换（表格数据逆时针旋转90度）</button>
+
+</BODY>
+
+</HTML>
+<script src="js/jquery-1.8.0.min.js"></script>
+<script src="js/fixedGrid.js"></script>
+<script src="js/data.js"></script>
+
+<script>
+
+var bool = false;
+
+/*测试数据*/
+var data = {
+	rows : [
+		{
+			"name":"邬畏畏1",
+			"age":"33",
+			"no":"DD57645",
+			"job":"工程师",
+			"hobby":"养生"
+		},		
+		{
+			"name":"姓名2",
+			"age":"33",
+			"no":"DD57645",
+			"job":"工程师",
+			"hobby":"养生"
+		},		
+		{
+			"name":"姓名3",
+			"age":"33",
+			"no":"DD57645",
+			"job":"工程师",
+			"hobby":"养生"
+		},		
+		{
+			"name":"姓名4",
+			"age":"33",
+			"no":"DD57645",
+			"job":"工程师",
+			"hobby":"养生"
+		},		
+		{
+			"name":"姓名5",
+			"age":"33",
+			"no":"DD57645",
+			"job":"工程师",
+			"hobby":"养生"
+		},		
+		{
+			"name":"姓名6",
+			"age":"33",
+			"no":"DD57645",
+			"job":"工程师",
+			"hobby":"养生"
+		},		
+		{
+			"name":"姓名7",
+			"age":"33",
+			"no":"DD57645",
+			"job":"工程师",
+			"hobby":"养生"
+		},		
+		{
+			"name":"姓名8",
+			"age":"33",
+			"no":"DD57645",
+			"job":"工程师",
+			"hobby":"养生"
+		},
+		{
+			"name":"姓名9",
+			"age":"33",
+			"no":"DD57645",
+			"job":"工程师",
+			"hobby":"养生"
+		}
+	]
+}/*data*/
+
+
+var options = {
+	fixedCol : 2,
+	columns : [
+		{
+			caption:"编号",
+			tip:"这是表头的提示信息啊",
+			field:"no"
+
+		},
+		{
+			caption:"姓名",
+			field:"name"
+		},
+		{
+			caption:"年龄",
+			field:"age",
+			onClick:function(object){
+				alert(JSON.stringify(object.column));
+				alert(JSON.stringify(object));
+			},
+			formatter : function(object){
+				return object.rows[object.rowIndex].age+"岁";
+			},
+			width:100
+		},
+		{
+			caption:"职业",
+			field:"job"
+		},
+		{
+			caption:"爱好",
+			field:"hobby"
+		}
+	],
+
+	rows:data.rows,
+	
+	mergeHeader : [
+		{
+			start : 3,
+			end   : 4,
+			caption:"表头B"
+		},
+		{
+			start : 0,
+			end   : 1,
+			caption:"表头A"
+		}
+	] , 
+	
+	columnWidth : 200 ,
+	height:250,
+	width:700,
+	isMatrix : false ,
+	pageSize:7
+}/*optioins*/
+
+var grid = new fixedGrid("#grid",options);
+
+/*数据转换矩阵（数据集逆时针旋转90度）*/
+$("#btn").click(function(){
+	bool = !bool;
+
+	var options = {
+		mergeRow : [
+			{
+				start : 3,
+				end   : 4,
+				caption:"行表头B"
+			},
+			{
+				start : 0,
+				end   : 1,
+				caption:"行表头A"
+			}
+		] , 
+		isMatrix: bool,/*是否把数据转换矩阵*/
+		rows:data.rows,
+		columns : [
+			{
+				caption:"编号",
+				tip:"这是表头的提示信息啊",
+				field:"no",
+			},
+			{
+				caption:"姓名",
+				field:"name",
+			},
+			{
+				caption:"年龄",
+				field:"age",
+			},
+			{
+				caption:"职业",
+				field:"job",
+			},
+			{
+				caption:"爱好",
+				field:"hobby"
+			}
+		],
+		columnWidth:100
+	};
+	grid.setOptions(options);
+
+	grid.loadData(data.rows);
+});
+</script>
